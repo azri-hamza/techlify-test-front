@@ -1,1 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* NG-ZORRO */
+@import "~ng-zorro-antd/style/index.min.css"; /* Import base styles */
+@import "~ng-zorro-antd/notification/style/index.min.css"; /* Import notification styles */

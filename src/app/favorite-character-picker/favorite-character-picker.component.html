@@ -1,0 +1,24 @@
+<h1 class="text-center">Choose your favorite Disney character</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">name</th>
+      <th scope="col">actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let character of characters">
+
+      <td>{{character.id}}</td>
+      <td>{{character.name}}</td>
+      <td>
+        <button class="btn btn-outline-secondary ml-1" type="button">edit</button>
+        <button class="btn btn-outline-danger m-1" type="button">delete</button>
+      </td>
+
+    </tr>
+  </tbody>
+
+</table>
