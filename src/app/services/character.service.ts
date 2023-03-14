@@ -11,18 +11,18 @@ import { Character } from '../models/character';
 })
 export class CharacterService {
   apiBaseUrl = environment.apiUrl;
-  httpOptions = {headers: new HttpHeaders({'Content-Type': 'application/json', 'Accept':'application/json'})};
+  httpOptions = {headers: new HttpHeaders({'Content-Type': 'application/json', 'Accept':'application/json'}), withCredentials: true};
 
   constructor(private http: HttpClient) { }
 
   public getCharacters():Observable<any>{
 
-      return this.http.get<any>(this.apiBaseUrl+'/characters').pipe(retry(1), catchError(this.handleError));
+      return this.http.get<any>(this.apiBaseUrl+'/characters', this.httpOptions).pipe(retry(1), catchError(this.handleError));
 
   }
 
   public getCharacter(id:number):Observable<any>{
-    return this.http.get<Character>(this.apiBaseUrl+`/characters/${id}`).pipe(retry(1), catchError(this.handleError));
+    return this.http.get<Character>(this.apiBaseUrl+`/characters/${id}`, this.httpOptions).pipe(retry(1), catchError(this.handleError));
   }
 
   public addCharacter(character: Character):Observable<any>{
@@ -32,21 +32,37 @@ export class CharacterService {
         ).pipe(retry(1), catchError(this.handleError));
   }
 
+  public updateCharacter(character: Character):Observable<any>{
+    return this.http.patch<any>(this.apiBaseUrl+`/characters/${character.id}`,
+        JSON.stringify(character),
+        this.httpOptions
+        ).pipe(retry(1), catchError(this.handleError));
+  }
+
+  public deleteCharacter(character: Character) {
+    return this.http
+    .delete<any>(
+      this.apiBaseUrl + `/characters/${character.id}`,
+      this.httpOptions
+    )
+    .pipe(retry(1), catchError(this.handleError));
+
+  }
   // Error handling
-  handleError(error: any) {
-    console.log("error : ", error);
+  private handleError(error: any) {
+    console.log("error : ", error.message);
     let errorMessage = '';
-    if (error.error instanceof ErrorEvent) {
+    if (error instanceof ErrorEvent) {
       // Get client-side error
       errorMessage = error.error.message;
     } else {
       // Get server-side error
-      errorMessage = `${error.error.statusCode} \n ${error.error.message}`;
+      errorMessage = `${error.statusCode} \n ${error.message}`;
     }
     // window.alert(errorMessage);
     return throwError(() => {
       const error: any = new Error(errorMessage);
-      //error.timestamp = Date.now();
+      error.timestamp = Date.now();
       return error;
     });
   }

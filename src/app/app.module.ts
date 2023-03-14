@@ -1,5 +1,5 @@
-import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { CommonModule, registerLocaleData } from '@angular/common';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -11,6 +11,16 @@ import { FavoriteCharacterPickerComponent } from './favorite-character-picker/fa
 import { CharacterFormComponent } from './character-form/character-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { NZ_I18N } from 'ng-zorro-antd/i18n';
+import { en_US } from 'ng-zorro-antd/i18n';
+import en from '@angular/common/locales/en';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LoginComponent } from './login/login.component';
+import { AdminHomeComponent } from './admin-home/admin-home.component';
+import { AuthInterceptor } from './http-interceptors/auth-interceptor';
+
+registerLocaleData(en);
 
 
 @NgModule({
@@ -19,6 +29,8 @@ import { NzNotificationModule } from 'ng-zorro-antd/notification';
     FavoriteCharacterPickerComponent,
     CharacterListComponent,
     CharacterFormComponent,
+    LoginComponent,
+    AdminHomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -28,8 +40,17 @@ import { NzNotificationModule } from 'ng-zorro-antd/notification';
     CommonModule,
     ReactiveFormsModule,
     NzNotificationModule,
+    BrowserAnimationsModule,
   ],
-  providers: [],
+  providers: [
+    { provide: NZ_I18N, useValue: en_US },
+    {provide : NzModalService},
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

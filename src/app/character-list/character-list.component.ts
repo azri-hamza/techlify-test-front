@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Character } from '../models/character';
 import { CharacterService } from '../services/character.service';
+import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'character-list',
@@ -11,7 +12,9 @@ import { CharacterService } from '../services/character.service';
 export class CharacterListComponent implements OnInit {
 
   characters : Character[]=[];
-  constructor(private characterService: CharacterService, public router: Router) { }
+  confirmModal?: NzModalRef;
+
+  constructor(private characterService: CharacterService, public router: Router, private modal: NzModalService) { }
 
   ngOnInit(): void {
     this.getData();
@@ -25,5 +28,20 @@ export class CharacterListComponent implements OnInit {
     });
   }
 
+  delete(character: Character){
+    this.characterService.deleteCharacter(character).subscribe(data => {
+      //Refres data
+      this.getData();
+    });
+  }
 
+  showDeleteConfirm(character: Character): void {
+    this.confirmModal = this.modal.confirm({
+      nzTitle: 'Attention',
+      nzContent: 'Do you Want to delete this character?',
+      nzOnOk: () => this.delete(character)
+    });
+
+    // this.confirmModal.triggerOk
+  }
 }

@@ -15,7 +15,7 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
 export class CharacterFormComponent implements OnInit {
   characterForm: FormGroup;
   character: Character = new Character();
-  constructor(private formBuilder: FormBuilder, private router: Router, private route: ActivatedRoute, private characterService: CharacterService) {
+  constructor(private formBuilder: FormBuilder, private router: Router, private route: ActivatedRoute, private characterService: CharacterService, private notification : NzNotificationService) {
     this.characterForm = this.formBuilder.group({
       id: [0],
       name: ['', [Validators.required, Validators.maxLength(20)]]
@@ -41,18 +41,44 @@ export class CharacterFormComponent implements OnInit {
   public add(character: Character){
     this.characterService.addCharacter(character).subscribe({
       next: (data) => {
+        console.log("ADD : ", data);
         this.notification.success(
           'Success',
-          'Record adde successfully',
+          'Record added successfully',
         );
 
         console.log("Character component - add method");
-        this.router.navigate(['/character-list']);
+        this.router.navigate(['/characters']);
 
       },
       error:  err =>{
+        console.log("Error add method - character form Component", err);
         this.notification.error(
-          Error,
+          'Error',
+          err.message
+        );
+      }
+    }
+    );
+  }
+
+  public update(character: Character){
+    this.characterService.updateCharacter(character).subscribe({
+      next: (data) => {
+        console.log("UPDATE : ", data);
+        this.notification.success(
+          'Success',
+          'Record updated successfully',
+        );
+
+        console.log("Character component - add method");
+        this.router.navigate(['/admin/characters']);
+
+      },
+      error:  err =>{
+        console.log("Error update method - character form Component", err);
+        this.notification.error(
+          'Error',
           err.message
         );
       }
@@ -61,18 +87,16 @@ export class CharacterFormComponent implements OnInit {
   }
 
   submitForm(value:Character){
-    this.characterService.addCharacter(value).subscribe(data =>{
-      console.log("ADD : ", data);
-    });
-  }
-
-  test(){
-    const saveSuccessToastEle = document.getElementById('saveSuccessToast')
-        const  saveSuccessToast = new Toast('saveSuccessToast');
-        console.log(saveSuccessToastEle);
-        saveSuccessToast.show();
+    if(value.id){
+      console.log("UPDATE CASE");
+      this.update(value);
+    }else{
+      console.log("ADD CASE");
+      this.add(value)
+    }
 
   }
+
 
   get f(){return this.characterForm.controls;}
   get name() { return this.characterForm.get('name');}

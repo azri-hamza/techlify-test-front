@@ -1,4 +1,4 @@
-<h1 class="text-center">Choose your favorite Disney character</h1>
+<h1 class="text-center">Manage characters</h1>
 
 <table class="table table-striped">
   <thead>
@@ -14,8 +14,8 @@
       <td>{{character.id}}</td>
       <td>{{character.name}}</td>
       <td>
-        <button class="btn btn-outline-secondary ml-1" type="button">edit</button>
-        <button class="btn btn-outline-danger m-1" type="button">delete</button>
+        <a [routerLink]="['/admin/characters/',character.id]"><button class="btn btn-outline-secondary ml-1" type="button">edit</button></a>
+        <button class="btn btn-outline-danger m-1" type="button" (click)="showDeleteConfirm(character)">delete</button>
       </td>
 
     </tr>

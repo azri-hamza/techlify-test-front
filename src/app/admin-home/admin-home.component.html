@@ -1,0 +1,6 @@
+<nav class="nav nav-pills d-flex justify-content-end">
+  <a class="btn btn-light mx-2 my-1  text-center" role="button" [routerLink]="['/admin/login']" *ngIf="isLoggedIn()">Login</a>
+  <a class="btn btn-light mx-2 my-1 text-center" (click)="logout()" role="button">Logout</a>
+</nav>
+
+<router-outlet></router-outlet>
