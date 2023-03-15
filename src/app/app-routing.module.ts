@@ -6,9 +6,11 @@ import { CharacterFormComponent } from './character-form/character-form.componen
 import { CharacterListComponent } from './character-list/character-list.component';
 import { FavoriteCharacterPickerComponent } from './favorite-character-picker/favorite-character-picker.component';
 import { LoginComponent } from './login/login.component';
+import { ThankYouComponent } from './thank-you/thank-you.component';
 
 const routes: Routes = [
   { path: '', component: FavoriteCharacterPickerComponent },
+  { path: 'thank-you', component: ThankYouComponent },
   {
     path: 'admin', component: AdminHomeComponent,
     children: [

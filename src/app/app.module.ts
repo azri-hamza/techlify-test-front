@@ -19,6 +19,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { AuthInterceptor } from './http-interceptors/auth-interceptor';
+import { ThankYouComponent } from './thank-you/thank-you.component';
 
 registerLocaleData(en);
 
@@ -31,6 +32,7 @@ registerLocaleData(en);
     CharacterFormComponent,
     LoginComponent,
     AdminHomeComponent,
+    ThankYouComponent,
   ],
   imports: [
     BrowserModule,
