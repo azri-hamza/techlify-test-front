@@ -1,6 +1,7 @@
 <div class="" style="margin-top: 95px;">
 <nav class="nav nav-pills d-flex justify-content-end">
   <a class="btn btn-light mx-2 my-1  text-center" role="button" [routerLink]="['/admin/login']" *ngIf="!isLoggedIn()">Login</a>
+  <a class="btn btn-light mx-2 my-1  text-center" role="button" [routerLink]="['/admin/characters']" *ngIf="isLoggedIn()">Characters</a>
   <a class="btn btn-light mx-2 my-1  text-center" role="button" [routerLink]="['/admin/popularity-report']" *ngIf="isLoggedIn()">Reports</a>
   <a class="btn btn-light mx-2 my-1 text-center" (click)="logout()" role="button" *ngIf="isLoggedIn()">Logout</a>
 </nav>
