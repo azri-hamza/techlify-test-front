@@ -13,7 +13,7 @@ export class AdminHomeComponent implements OnInit {
   ngOnInit(): void {
   }
   public isLoggedIn(){
-    return !localStorage.getItem('token')?true:false;
+    return localStorage.getItem('token')?true:false;
   }
   public logout(){
     localStorage.removeItem('token');
