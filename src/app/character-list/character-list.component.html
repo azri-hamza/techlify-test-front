@@ -1,24 +1,38 @@
 <h1 class="text-center">Manage characters</h1>
+<div class="container">
+  <div class="d-flex flex-row p-1">
+    <div class="input-group mb-2  p-2 flex-grow-1 ">
+      <input type="text" class="form-control" id="input-search" (change)="setSearchValue($event)" placeholder="Type character name here, and hit Search button" aria-label="Search character by name"
+        aria-describedby="button-search">
+      <button class="btn btn-outline-secondary" type="button"   (click)="getData()" id="button-search">Search</button>
+    </div>
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">name</th>
-      <th scope="col">actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let character of characters">
+    <button class="btn btn-primary p-2" type="button" (click)="addNew()">Add new character</button>
+  </div>
 
-      <td>{{character.id}}</td>
-      <td>{{character.name}}</td>
-      <td>
-        <a [routerLink]="['/admin/characters/',character.id]"><button class="btn btn-outline-secondary ml-1" type="button">edit</button></a>
-        <button class="btn btn-outline-danger m-1" type="button" (click)="showDeleteConfirm(character)">delete</button>
-      </td>
 
-    </tr>
-  </tbody>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">name</th>
+        <th scope="col">actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let character of characters">
 
-</table>
+        <td>{{character.id}}</td>
+        <td>{{character.name}}</td>
+        <td>
+          <a [routerLink]="['/admin/characters/',character.id]"><button class="btn btn-outline-secondary ml-1"
+              type="button">edit</button></a>
+          <button class="btn btn-outline-danger m-1" type="button"
+            (click)="showDeleteConfirm(character)">delete</button>
+        </td>
+
+      </tr>
+    </tbody>
+
+  </table>
+</div>

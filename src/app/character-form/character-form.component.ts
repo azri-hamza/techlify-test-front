@@ -48,7 +48,7 @@ export class CharacterFormComponent implements OnInit {
         );
 
         console.log("Character component - add method");
-        this.router.navigate(['/characters']);
+        this.router.navigate(['/admin/characters']);
 
       },
       error:  err =>{

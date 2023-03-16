@@ -15,9 +15,11 @@ export class CharacterService {
 
   constructor(private http: HttpClient) { }
 
-  public getCharacters():Observable<any>{
-
-      return this.http.get<any>(this.apiBaseUrl+'/characters', this.httpOptions).pipe(retry(1), catchError(this.handleError));
+  public getCharacters(charcterName:string):Observable<any>{
+    console.log("NAME VALUE : ",charcterName);
+      let options = Object.assign(this.httpOptions,{params: {search: charcterName}});
+      console.log("options", options);
+      return this.http.get<any>(this.apiBaseUrl+'/characters', options).pipe(retry(1), catchError(this.handleError));
 
   }
 

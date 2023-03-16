@@ -13,6 +13,8 @@ export class CharacterListComponent implements OnInit {
 
   characters : Character[]=[];
   confirmModal?: NzModalRef;
+  searchName: string = '';
+
 
   constructor(private characterService: CharacterService, public router: Router, private modal: NzModalService) { }
 
@@ -21,11 +23,19 @@ export class CharacterListComponent implements OnInit {
   }
 
   getData(){
-    this.characterService.getCharacters().subscribe(data => {
-      console.log(data);
-      this.characters = data.data;
+    console.log("Search name value ", this.searchName);
+    if(this.searchName){
+      this.characterService.getCharacters(this.searchName).subscribe(data => {
+        console.log(data);
+        this.characters = data.data;
 
-    });
+      });
+    }else{
+      this.characterService.getCharacters('').subscribe(data => {
+        console.log(data);
+        this.characters = data.data;
+      });
+    }
   }
 
   delete(character: Character){
@@ -43,5 +53,14 @@ export class CharacterListComponent implements OnInit {
     });
 
     // this.confirmModal.triggerOk
+  }
+
+  addNew(){
+    this.router.navigate(['/admin/characters/0']);
+  }
+
+  setSearchValue(event:any){
+    console.log("NEW imput value ", event.target.value);
+    this.searchName=event.target.value;
   }
 }

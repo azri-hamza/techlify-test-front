@@ -7,6 +7,7 @@ import { CharacterListComponent } from './character-list/character-list.componen
 import { FavoriteCharacterPickerComponent } from './favorite-character-picker/favorite-character-picker.component';
 import { LoginComponent } from './login/login.component';
 import { ThankYouComponent } from './thank-you/thank-you.component';
+import { VotesHeatmapComponent } from './votes-heatmap/votes-heatmap.component';
 
 const routes: Routes = [
   { path: '', component: FavoriteCharacterPickerComponent },
@@ -18,7 +19,8 @@ const routes: Routes = [
       { path: 'characters', component: CharacterListComponent },
       { path: 'characters/:id', component: CharacterFormComponent },
       // { path: 'characters/:id', component: CharacterFormComponent, canActivate: [AuthGuard] },
-      { path: 'login', component: LoginComponent }
+      { path: 'popularity-report', component: VotesHeatmapComponent },
+      { path: 'login', component: LoginComponent },
     ]
   }
 ];

@@ -20,12 +20,17 @@ export class VoteService {
         this.httpOptions
         ).pipe(retry(1), catchError(this.handleError));
   }
+
   public getCharacters():Observable<any>{
 
     return this.http.get<any>(this.apiBaseUrl+'/votes/characters', this.httpOptions).pipe(retry(1), catchError(this.handleError));
 
-}
+  }
+  public getAllVotes():Observable<any>{
 
+    return this.http.get<any>(this.apiBaseUrl+'/votes/daily', this.httpOptions).pipe(retry(1), catchError(this.handleError));
+
+  }
    // Error handling
    private handleError(error: any) {
     console.log("error : ", error.message);

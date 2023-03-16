@@ -20,6 +20,8 @@ import { LoginComponent } from './login/login.component';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { AuthInterceptor } from './http-interceptors/auth-interceptor';
 import { ThankYouComponent } from './thank-you/thank-you.component';
+import { VotesHeatmapComponent } from './votes-heatmap/votes-heatmap.component';
+import { HeatMapModule, Legend, Tooltip, LegendService, TooltipService  } from '@syncfusion/ej2-angular-heatmap';
 
 registerLocaleData(en);
 
@@ -33,6 +35,7 @@ registerLocaleData(en);
     LoginComponent,
     AdminHomeComponent,
     ThankYouComponent,
+    VotesHeatmapComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,6 +46,7 @@ registerLocaleData(en);
     ReactiveFormsModule,
     NzNotificationModule,
     BrowserAnimationsModule,
+    HeatMapModule,
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },
@@ -51,7 +55,9 @@ registerLocaleData(en);
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
-    }
+    },
+    LegendService,
+    TooltipService,
   ],
   bootstrap: [AppComponent]
 })
