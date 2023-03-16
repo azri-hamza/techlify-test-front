@@ -16,10 +16,10 @@ const routes: Routes = [
     path: 'admin', component: AdminHomeComponent,
     children: [
 
-      { path: 'characters', component: CharacterListComponent },
-      { path: 'characters/:id', component: CharacterFormComponent },
-      // { path: 'characters/:id', component: CharacterFormComponent, canActivate: [AuthGuard] },
-      { path: 'popularity-report', component: VotesHeatmapComponent },
+      { path: 'characters', component: CharacterListComponent, canActivate: [AuthGuard] },
+      // { path: 'characters/:id', component: CharacterFormComponent },
+      { path: 'characters/:id', component: CharacterFormComponent, canActivate: [AuthGuard] },
+      { path: 'popularity-report', component: VotesHeatmapComponent, canActivate: [AuthGuard] },
       { path: 'login', component: LoginComponent },
     ]
   }

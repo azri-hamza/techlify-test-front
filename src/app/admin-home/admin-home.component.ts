@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LoginService } from '../services/login.service';
 
 @Component({
   selector: 'app-admin-home',
@@ -8,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class AdminHomeComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private loginSerice: LoginService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -16,6 +17,7 @@ export class AdminHomeComponent implements OnInit {
     return localStorage.getItem('token')?true:false;
   }
   public logout(){
+    this.loginSerice.logout();
     localStorage.removeItem('token');
     this.router.navigate(['/admin/login']);
   }

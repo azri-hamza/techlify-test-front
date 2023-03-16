@@ -28,7 +28,11 @@ export class LoginService {
   }
 
   logout(){
+    this.accessToken='';
+  }
 
+  isAuthenticated(){
+    return this.accessToken ? true : false;
   }
 
   getCurrentUser(){
