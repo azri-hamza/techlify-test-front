@@ -13,7 +13,7 @@ export class VotesHeatmapComponent implements OnInit {
   // Data for heatmap
   //dataSource: number[][]=[] ;
 
-  dataSource: number[][] = [
+  dataSource: any[][] = [
       [73, 39, 26, 39, 94, 0, 73, 39, 26, 39, 94, 0, ],
       [93, 58, 53, 38, 26, 68, 73, 39, 26, 39, 94, 0,],
       [99, 28, 22, 4, 66, 90, 73, 39, 26, 39, 94, 0, ],
@@ -52,23 +52,31 @@ export class VotesHeatmapComponent implements OnInit {
     xAxis: Object = {
       labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10','11', '12', '13', '14', '15', '16', '17', '18', '19', '20','21', '22', '23', '24', '25', '26', '27', '28', '29', '30','31'],
     };
+  public paletteSettings: Object = {
+    palette: [{ color: 'rgb(172, 213, 242)' },
+    { color: 'rgb(127, 168, 201)' },
+    { color: 'rgb(82, 123, 160)' },
+    { color: 'rgb(37, 78, 119)' },
+    ],
+    type: 'Gradient'
+  };
   constructor(private voteService: VoteService) {
     // initialize tow-dimentionnal array
     for (let i:number = 0; i < 31; i++) {
-      let line: number[]=[]
+      let line: any[]=[]
 
       for (let j:number = 0; j < 12; j++) {
-        line.push(0);
+        line.push(null);
       }
       this.dataSource.push(line);
     }
 
-    let dataSourceUpdated: number[][]=[];
+    let dataSourceUpdated: any[][]=[];
     for (let i:number = 0; i < 31; i++) {
-      let line: number[]=[]
+      let line: any[]=[]
 
       for (let j:number = 0; j < 12; j++) {
-        line.push(0);
+        line.push(null);
       }
       dataSourceUpdated.push(line);
     }

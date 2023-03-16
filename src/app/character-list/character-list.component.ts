@@ -60,7 +60,6 @@ export class CharacterListComponent implements OnInit {
   }
 
   setSearchValue(event:any){
-    console.log("NEW imput value ", event.target.value);
     this.searchName=event.target.value;
   }
 }
