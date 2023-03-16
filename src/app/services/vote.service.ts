@@ -26,6 +26,7 @@ export class VoteService {
     return this.http.get<any>(this.apiBaseUrl+'/votes/characters', this.httpOptions).pipe(retry(1), catchError(this.handleError));
 
   }
+
   public getAllVotes():Observable<any>{
 
     return this.http.get<any>(this.apiBaseUrl+'/votes/daily', this.httpOptions).pipe(retry(1), catchError(this.handleError));
@@ -35,6 +36,12 @@ export class VoteService {
   public getCharacterVotes(id: number):Observable<any>{
 
     return this.http.get<any>(this.apiBaseUrl+`/votes/daily/${id}`, this.httpOptions).pipe(retry(1), catchError(this.handleError));
+
+  }
+
+  public getTopFiveCharacters():Observable<any>{
+
+    return this.http.get<any>(this.apiBaseUrl+'/votes/top5', this.httpOptions).pipe(retry(1), catchError(this.handleError));
 
   }
 

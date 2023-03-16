@@ -11,6 +11,7 @@ import { VoteService } from '../services/vote.service';
 })
 export class VotesHeatmapComponent implements OnInit {
   characters: Character[] = [];
+  top5Characters: Character[] = [];
   selectedCharacerId:number = 0;
 
   // Data for heatmap
@@ -74,6 +75,9 @@ export class VotesHeatmapComponent implements OnInit {
         this.characters = data.data;
       }
     })
+
+    // Top 5 charactes
+    this.getTopFiveCharacters();
   }
 
   onChange(event: any) {
@@ -146,4 +150,14 @@ export class VotesHeatmapComponent implements OnInit {
 
   }
 
+  getTopFiveCharacters(){
+     // fill in select input
+     this.voteService.getTopFiveCharacters().subscribe({
+      next: (data) => {
+        console.log("Characters - votes-top5 ", data);
+        this.top5Characters = data.data;
+      }
+    })
+
+  }
 }

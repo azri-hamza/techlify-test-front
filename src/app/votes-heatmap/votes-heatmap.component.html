@@ -21,6 +21,10 @@
       >
       </ejs-heatmap>
     </div>
+    <ul class="list-group">
+      <li class="list-group-item active text-center" aria-current="true">Top 5 characters</li>
+      <li *ngFor="let character of top5Characters" class="list-group-item">{{character.name}}</li>
+    </ul>
 </div>
 
 
