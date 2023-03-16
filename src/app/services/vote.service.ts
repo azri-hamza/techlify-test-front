@@ -31,6 +31,13 @@ export class VoteService {
     return this.http.get<any>(this.apiBaseUrl+'/votes/daily', this.httpOptions).pipe(retry(1), catchError(this.handleError));
 
   }
+
+  public getCharacterVotes(id: number):Observable<any>{
+
+    return this.http.get<any>(this.apiBaseUrl+`/votes/daily/${id}`, this.httpOptions).pipe(retry(1), catchError(this.handleError));
+
+  }
+
    // Error handling
    private handleError(error: any) {
     console.log("error : ", error.message);
