@@ -11,7 +11,7 @@ import { VoteService } from '../services/vote.service';
 })
 export class VotesHeatmapComponent implements OnInit {
   characters: Character[] = [];
-  selectedCharacerId = 0;
+  selectedCharacerId:number = 0;
 
   // Data for heatmap
   dataSource: any[][] = [
@@ -77,7 +77,7 @@ export class VotesHeatmapComponent implements OnInit {
   }
 
   onChange(event: any) {
-    this.selectedCharacerId = event.target.value;
+    this.selectedCharacerId = parseInt(event.target.value);
     this.getData();
   }
 
@@ -104,6 +104,7 @@ export class VotesHeatmapComponent implements OnInit {
 
     // get votes by character
     if (this.selectedCharacerId) {
+      console.log("Have ID ", this.selectedCharacerId);
       // get all votes
       this.voteService.getCharacterVotes(this.selectedCharacerId).subscribe({
         next: (data) => {
@@ -124,6 +125,7 @@ export class VotesHeatmapComponent implements OnInit {
 
     } else {
       // get all votes
+      console.log("Have NOT ID ", this.selectedCharacerId);
       this.voteService.getAllVotes().subscribe({
         next: (data) => {
           data.data.forEach((vote: any) => {
