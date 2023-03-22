@@ -40,7 +40,7 @@ export class LoginService {
   }
 
   getCsrfToken(){
-    return this.http.get('http://localhost/sanctum/csrf-cookie',this.httpOptions).pipe(retry(0), catchError(this.handleError));
+    return this.http.get(`${environment.baseUrl}/sanctum/csrf-cookie`,this.httpOptions).pipe(retry(0), catchError(this.handleError));
   }
 
    // Error handling
