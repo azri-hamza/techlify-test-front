@@ -10,7 +10,7 @@ export class LoginService {
   public accessToken: string = '';
   apiBaseUrl = environment.apiUrl;
   httpOptions = {
-    headers: new HttpHeaders({'Content-Type': 'application/json', 'Accept':'application/json'}),
+    headers: new HttpHeaders({'Content-Type': 'application/json', 'Accept':'application/json','X-Requested-With': 'XMLHttpRequest'}),
     withCredentials: true
   };
   constructor(private http: HttpClient) { }
